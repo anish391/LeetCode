@@ -57,3 +57,23 @@ class Solution {
         }
     }
 }
+
+
+class Solution {
+    private int sum = 0;
+    public int rangeSumBST(TreeNode root, int L, int R) {
+        if(root==null)
+            return 0;
+        inorder(root,L,R);
+        return sum;
+    }
+    
+    public void inorder(TreeNode root, int L, int R){
+        if(root==null)
+            return;
+        if(root.val>=L && root.val<=R)
+            sum+= root.val;
+        inorder(root.left,L,R);
+        inorder(root.right,L,R);
+    }
+}
