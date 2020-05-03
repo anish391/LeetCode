@@ -24,3 +24,19 @@ class Solution {
         return result;
     }
 }
+
+class Solution {
+    public int fib(int N) {
+        if(N<=1)
+            return N;
+        //int[] dp = new int[N+1];
+        int a = 0;
+        int b = 1;
+        for(int i=2;i<=N;i++){
+            int c = b+a;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+}

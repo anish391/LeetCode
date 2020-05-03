@@ -37,3 +37,30 @@ class Solution {
         return count;
     }
 }
+
+class Solution {
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+        int[] answer = new int[queries.length];
+        for(int i=0;i<queries.length;i++){
+            for(int j=0;j<words.length;j++){
+                if(frequency(queries[i])<frequency(words[j]))
+                    answer[i]++;
+            }
+        }
+        return answer;
+    }
+    
+    public int frequency(String s){
+        int[] freqCount = new int[26];
+        for(char c: s.toCharArray())
+            freqCount[c-'a']++;
+        int i=0;
+        //System.out.println(Arrays.toString(freqCount));
+        while(i<26){
+            if(freqCount[i]>0)
+                break;
+            i++;
+        }
+        return freqCount[i];
+    }
+}

@@ -40,3 +40,36 @@ class Solution {
         return false;
     }
 }
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    private int xDepth=0, yDepth=0;
+    private TreeNode xParent=null, yParent=null;
+    public boolean isCousins(TreeNode root, int x, int y) {
+        traverse(root,null,x,y,0);
+        return xDepth==yDepth && xParent!=yParent;
+    }
+    
+    public void traverse(TreeNode root,TreeNode parent, int x, int y, int currentDepth){
+        if(root==null)
+            return;
+        if(x==root.val){
+            xDepth=currentDepth;
+            xParent = parent;
+        }
+        if(y==root.val){
+            yDepth=currentDepth;
+            yParent=parent;
+        }
+        traverse(root.left, root,x,y,currentDepth+1);
+        traverse(root.right,root,x,y,currentDepth+1);
+    }
+}

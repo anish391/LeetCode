@@ -11,3 +11,12 @@
         return null;
     }
 }
+
+3 5 6 2 11 9 T=7
+
+map = {
+    3:0, complement = 4
+    5:1, complement = 2
+    6:2, complement = 1
+    
+}

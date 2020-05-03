@@ -42,3 +42,40 @@ class Solution {
         inorder(root.right);
     }
 }
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList();
+        TreeNode current = root;
+        while(current!=null){
+            if(current.left==null){
+                list.add(current.val);
+                current = current.right;
+            }
+            else{
+                TreeNode predecessor = current.left;
+                while(predecessor.right!=null && predecessor.right!=current)
+                    predecessor = predecessor.right;
+                if(predecessor.right==null){
+                    predecessor.right = current;
+                    current = current.left;
+                }
+                else{
+                    predecessor.right=null;
+                    list.add(current.val);
+                    current = current.right;
+                }
+            }
+        }
+        return list;
+    }
+}

@@ -27,7 +27,7 @@ class Solution {
     }
 }
 
-class Solution {
+// specifically for binary SEARCH tree Solution 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root==null)
             return null;

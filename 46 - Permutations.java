@@ -28,3 +28,30 @@ class Solution {
         return nums;
     }
 }
+
+class Solution {
+    private int n;
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList();
+        boolean[] visited = new boolean[nums.length];
+        n = nums.length;
+        permute(result, new ArrayList<Integer>(), nums, visited);
+        return result;
+    }
+    
+    public void permute(List<List<Integer>> result, List<Integer> list,int[] nums, boolean[] visited){
+        if(list.size()==n){
+            result.add(new ArrayList(list));
+        }
+        for(int i=0;i<n;i++){
+            if(visited[i])
+                continue;
+            visited[i] = true;
+            list.add(nums[i]);
+            permute(result, list, nums, visited);
+            list.remove(list.size()-1);
+            visited[i] = false;
+        }
+    }
+
+}
