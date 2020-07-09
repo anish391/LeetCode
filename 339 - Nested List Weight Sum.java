@@ -42,3 +42,25 @@ class Solution {
         return sum;
     }
 }
+
+class Solution {
+    public int depthSum(List<NestedInteger> nestedList) {
+        int depthSum = 0;
+        for(NestedInteger ni: nestedList){
+            depthSum+=dfs(ni, 1);
+        }
+        return depthSum;
+    }
+    
+    public int dfs(NestedInteger nestedInteger, int depth){
+        if(nestedInteger.isInteger())
+            return nestedInteger.getInteger()*depth;
+        else{
+            int sum = 0;
+            for(NestedInteger ni: nestedInteger.getList()){
+                sum+=dfs(ni, depth+1);
+            }
+            return sum;
+        }
+    }
+}

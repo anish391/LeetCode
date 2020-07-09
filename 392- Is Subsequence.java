@@ -1,17 +1,22 @@
-public class Solution {
+// Solution 1
+
+class Solution {
     public boolean isSubsequence(String s, String t) {
-        if (s.length() == 0) return true;
-        int indexS = 0, indexT = 0;
-        while (indexT < t.length()) {
-            if (t.charAt(indexT) == s.charAt(indexS)) {
-                indexS++;
-                if (indexS == s.length()) return true;
+        int sIndex=0, tIndex=0;
+        while(sIndex<s.length() && tIndex<t.length()){
+            if(s.charAt(sIndex)==t.charAt(tIndex)){
+                sIndex++;
+                tIndex++;
             }
-            indexT++;
+            else{
+                tIndex++;
+            }
         }
-        return false;
+        return sIndex==s.length();
     }
 }
+
+// Solution 2: Follow up for if many incoming strings are to be compared to string t.
 
 class Solution {
     public boolean isSubsequence(String s, String t) {
@@ -54,3 +59,4 @@ class Solution {
     }
     
 }
+

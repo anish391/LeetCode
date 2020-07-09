@@ -1,22 +1,18 @@
 class Solution {
-    List<String> result;
     public List<String> generateParenthesis(int n) {
-        result = new ArrayList();
-        backtrack(n,n, "");
-        System.out.println(result);
-        return result;
+        List<String> list = new ArrayList();
+        backtrack(list, "", 0, 0, n);
+        return list;
     }
     
-    public void backtrack(int left, int right, String s){
-        if(left==0 && right==0){
-            result.add(s);
+    public void backtrack(List<String> list, String s, int opening, int closing, int maxBrackets){
+        if(s.length()==max*2){
+            list.add(s);
             return;
         }
-        if(left<=right && left>=0){
-            backtrack(left-1, right, s+"(");
-        }
-        if(left<right && left>=0){
-            backtrack(left,right-1, s+")");
-        }
+        if(opening<maxBrackets)
+            backtrack(list, s+"(", opening+1, closing, maxBrackets);
+        if(closing<opening)
+            backtrack(list, s+")", opening, closing+1, maxBrackets);
     }
 }
