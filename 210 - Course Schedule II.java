@@ -1,37 +1,38 @@
 class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        int[] order = new int[numCourses];
-        List<Integer>[] graph = new ArrayList[numCourses];
-        int[] indegree = new int[numCourses];
+        List<Integer>[] graph = new List[numCourses];
+        List<Integer> courseOrder = new ArrayList();
         Queue<Integer> queue = new LinkedList();
-        int count = 0;
-        int index = 0;
-        for(int i=0;i<numCourses;i++)
+        int[] indegree = new int[numCourses];
+        int finishedCourses = 0;
+        for(int i=0;i<graph.length;i++)
             graph[i] = new ArrayList();
         for(int[] prerequisite: prerequisites){
-            graph[prerequisite[1]].add(prerequisite[0]);
-            indegree[prerequisite[0]]++;
+            int courseToTake = prerequisite[0];
+            int preCourse = prerequisite[1];
+            graph[preCourse].add(courseToTake);
+            indegree[courseToTake]++;
         }
-        for(int i=0;i<numCourses;i++){
+        for(int i=0;i<indegree.length;i++){
             if(indegree[i]==0)
                 queue.offer(i);
         }
         while(!queue.isEmpty()){
-            int node = queue.poll();
-            if(index>numCourses)
-                break;
-            order[index++] = node;
-            for(int i=0;i<graph[node].size();i++){
-                int neighbor = graph[node].get(i);
-                indegree[neighbor]--;
-                if(indegree[neighbor]==0)
-                    queue.offer(neighbor);
+            int course = queue.poll();
+            courseOrder.add(course);
+            finishedCourses++;
+            for(int nextCourse: graph[course]){
+                indegree[nextCourse]--;
+                if(indegree[nextCourse]==0)
+                    queue.offer(nextCourse);
             }
-            count++;
         }
-        if(index>numCourses || count!=numCourses)
+        if(finishedCourses!=numCourses)
             return new int[0];
-        else
-            return order;
+        int[] result = new int[numCourses];
+        for(int i=0;i<courseOrder.size();i++){
+            result[i] = courseOrder.get(i);
+        }
+        return result;
     }
 }

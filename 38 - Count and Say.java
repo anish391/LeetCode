@@ -4,29 +4,30 @@ class Solution {
             return "-1";
         if(n==1)
             return "1";
-        String s = "1";
+        String result = "1";
         for(int i=1;i<n;i++){
-            s=helper(s);
+            result = createSequence(result);
         }
-        return s;
+        return result;
     }
     
-    public String helper(String s){
+    public String createSequence(String seq){
         StringBuilder sb = new StringBuilder();
-        char c = s.charAt(0);
-        int count = 1;
-        for(int i=1;i<s.length();i++){
-            if(c==s.charAt(i))
+        char currentChar = seq.charAt(0);
+        int count = 0;
+        for(int i=0;i<seq.length();i++){
+            if(currentChar==seq.charAt(i)){
                 count++;
+            }
             else{
                 sb.append(count);
-                sb.append(c);
-                c=s.charAt(i);
-                count = 1;
+                sb.append(currentChar);
+                currentChar = seq.charAt(i);
+                count=1;
             }
         }
         sb.append(count);
-        sb.append(c);
+        sb.append(currentChar);
         return sb.toString();
     }
 }
